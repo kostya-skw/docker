@@ -1,0 +1,15 @@
+test-nginx:
+ dockerfile: ./Dockerfile
+ build: ./containers/test-nginx
+ ports:
+  - 8080:80
+ volumes:
+  - ./logs:/var/logs/nginx
+  - ./www:/var/www:rw
+ links:
+  - test-php-fpm
+test-php-fpm:
+ dockerfile: ./Dockerfile
+ build: ./containers/test-php-fpm
+ volumes:
+  - ./www:/var/www:rw
